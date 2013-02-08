@@ -1,0 +1,108 @@
+
+<!-- Begin #colRight -->
+		<div id="colRight">
+		<form id="searchform" action="http://www.google.com/search" target="_blank" method="get">
+			<div class="rightBox">
+				<div class="rightBoxTop"></div>
+				<div class="rightBoxMidSearch">
+					<input type="text" id="as_q" name="as_q" value="type your search here" onfocus="this.value=''" />
+                    <input name="as_sitesearch" value="{{ blog.baseurl}}" type="hidden" />
+					<input type="submit" value="" class="submit" id="searchsubmit"/>
+				</div>	
+				<div class="rightBoxBottom"></div>
+			</div>
+		</form>
+        
+				<div class="rightBox">
+				<div class="rightBoxTop"></div>                
+				<div class="rightBoxMid">
+				<h2>热门文章</h2> 
+          {% if blog.hotposts %}
+			<ul>
+				{% for entry in blog.hotposts %}
+				<li><a href="/{{entry.link|escape}}" title="{{entry.title|escape}}">{{entry.title|escape}}</a>({{entry.readtimes}})</li>
+				{%endfor%}
+			</ul>
+			{% endif %}
+            </div>
+            <div class="rightBoxBottom"></div>
+            </div>
+            
+				<div class="rightBox">
+				<div class="rightBoxTop"></div>                
+				<div class="rightBoxMid">
+				<h2>最新评论</h2>
+                
+			{% if recent_comments %}
+			<ul class="new-comments">
+				{% for comment in recent_comments %}
+				<li><a href="/{{comment.entry.link}}#comment-{{comment.key.id}}" title="评论于：{{comment.entry.title|escape}}">{{comment.author}}</a><span> 说：{{comment.shortcontent}}</span>
+				</li>
+				{%endfor%}
+			</ul>
+			{% endif %}
+            </div>
+            <div class="rightBoxBottom"></div>
+            </div>
+            
+				<div class="rightBox">
+				<div class="rightBoxTop"></div>                
+				<div class="rightBoxMid">
+				<h2>文章分类</h2>               
+			{% if categories %}
+			<ul>
+				{%for cate in categories%}
+				<li><a href="/category/{{cate.slug}}">{{cate.name}}</a>({{cate.count}})</li>
+				{%endfor%}
+			</ul>
+			{% endif %}
+            </div>
+            <div class="rightBoxBottom"></div>
+            </div>
+            
+				<div class="rightBox">
+				<div class="rightBoxTop"></div>                
+				<div class="rightBoxMid">
+				<h2>标签云</h2>               
+			{% if alltags %}
+			<ul>
+			{% for t in alltags %}
+			<a title="{{ t.tagcount }} pages" href="/tag/{{t.tag|urlencode}}"><span style='font-size:{{ t.tagcount|add:9 }}px;'>{{t.tag}}</span></a>
+			{%endfor%}
+			</ul>
+			{% endif %}
+            </div>
+            <div class="rightBoxBottom"></div>
+            </div>		
+            
+				<div class="rightBox">
+				<div class="rightBoxTop"></div>                
+				<div class="rightBoxMid">
+				<h2>文章归档</h2>               
+			{% if archives %}
+			<ul>
+				{%for archive in archives%}
+				<li><a href="/{{archive.year}}/{{archive.month}}">{{archive.year}}年{{archive.month}}月</a>({{archive.entrycount}})</li>
+				{%endfor%}
+			</ul>
+			{% endif %}
+            </div>
+            <div class="rightBoxBottom"></div>
+            </div>		
+            
+				<div class="rightBox">
+				<div class="rightBoxTop"></div>                
+				<div class="rightBoxMid">
+				<h2>友情链接</h2> 
+			{% if blogroll %}
+			<ul>
+				{%for link in blogroll%}
+				<li><a href="{{link.href}}" target="_blank">{{link.linktext}}</a></li>
+				{%endfor%}
+			</ul>
+			{% endif %}
+            </div>
+            <div class="rightBoxBottom"></div>
+            </div>		
+		</div>
+		<!-- End #colRight -->

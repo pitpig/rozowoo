@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+{%mf head%}
+<title>{% block title %} {{ blog.title|escape}}{% endblock %}</title>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="alternate" type="application/rss+xml" title="{{ blog.title|escape }} RSS Feed" href="{{ blog.feedurl }}" />
+<link href="/themes/{{ blog.theme_name }}/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+{%endmf%}
+</head>
+
+<body>
+<!-- Begin #wrapper -->
+<div id="wrapper">
+	<!-- Begin #header -->
+	<div id="header">
+		<div id="logo"><a href="/"><img src="/themes/{{ blog.theme_name }}/images/logo.png" alt="{{ blog.title|escape}}" /></a><br /><span>{{ blog.subtitle|escape}}</span></div>
+		<!-- Begin #socialLinks -->
+			<div id="socialLinks">
+				<a href="http://cn.linkedin.com/in/takeasy" class="linkedin" title="添加到 LinkedIn!">Join us on LinkedIn!</a>
+				<a href="http://www.takeasy.org.ru/" class="facebook" title="添加到 Facebook!">Join us on Facebbook!</a>
+				<a href="http://twitter.com/intocenter" class="twitter" title="添加到 Twitter!">Follow Us on Twitter!</a>
+				<a href="{{ blog.feedurl }}" title="RSS" class="rss">Subscribe to our RSS Feed!</a>
+			</div>
+		<!-- End #socialLinks -->
+	</div>
+	<!-- End #header -->
+	
+	<!-- Begin #content -->
+    <div id="content" class="clearfix">
+    {% block content %}{% endblock %}
+    </div>
+		<!-- end content -->
+            </div>
+	<!-- end wrapper -->
+	<!-- begin footer -->
+	<div id="footer">
+		<div id="footerInner">
+		<!-- Popular Articles -->
+        <div class="boxFooter">
+		<h2>热门文章</h2>
+          {% if blog.hotposts %}
+			<ul>
+				{% for entry in blog.hotposts %}
+				<li><a href="/{{entry.link|escape}}" title="{{entry.title|escape}}">{{entry.title|escape}}</a>({{entry.readtimes}})</li>
+				{%endfor%}
+			</ul>
+			{% endif %}
+		</div>
+        
+		<div class="boxFooter">
+		<h2>最新文章</h2>      
+       {% if blog.recentposts %}
+			<ul>
+				{% for entry in blog.recentposts %}
+				<li><a href="/{{entry.link|escape}}" title="{{entry.title|escape}}">{{entry.title|escape}}</a>({{entry.readtimes}})</li>
+				{%endfor%}
+			</ul>
+			{% endif %}
+		</div>
+		
+		<div class="boxFooter">
+		<h2>博客日志</h2>
+			{{blog.blognotice}}
+		</div>
+		</div>
+	</div>
+	<div id="copyright">
+		<div id="copyrightInner">
+    <span class="copyrightleft";>&copy;Copyright 2010 {{ blog.title|escape}}. Powered by <a href="https://appengine.google.com">GAE</a> And <a href="http://xuming.net">Micolog</a>, Theme Mod By <a href="http://www.takeasy.org.ru">Takeasy</a></span>
+		<div id="site5bottom"><a href="http://gk.site5.com/t/237">Site5.com | Experts in Web Hosting.</a>{%mf footer%}{%endmf%}</div>
+		</div>
+	</div>
+	<!-- end footer -->
+
+</body>
+</html>

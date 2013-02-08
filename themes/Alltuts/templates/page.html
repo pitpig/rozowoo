@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %} {{entry.title|escape}} - {{blog.title|escape}} {% endblock %}
+
+{% block head_block %}
+
+{% if entry %}
+{%if entry.strtags%}<meta name="Keywords" content="{{entry.strtags|escape}}" />{%endif%}
+{%if entry.excerpt%} <meta name="Description" content="{{entry.excerpt|escape}}" />{%endif%}
+{% endif %}
+
+{% endblock %}
+
+{% block content %}
+
+<!-- begin colLeft -->
+	<div id="colLeft">
+    <!-- Begin .postBox -->
+		<div class="postBox">
+			<div class="postBoxTop"></div>
+			<div class="postBoxMid">
+            {% if entry %}
+				<div class="postBoxMidInner first clearfix">
+				<h1><a href="/{{ entry.link|escape }}" rel="bookmark" title="点击阅读： {{entry.title|escape}}">{{entry.title|escape}}</a></h1> 
+				
+                <p>
+							{{ entry.content }}
+                <div class="clearboth"></div>
+				</p>
+			</div>
+					<div class="postCredentials">							
+							<!-- Social Sharing Icons -->
+							<div class="social">
+							<strong>喜欢这篇文章吗？ 那么共享它吧！</strong>
+									<a href="http://twitter.com/home/?status={{entry.title|escape}} : /{{ entry.link|escape }}" title="Tweet this!">
+									<img src="/themes/{{ blog.theme_name }}/images/twitter.png" alt="Tweet this!" /></a>				
+									<a href="http://www.stumbleupon.com/submit?url=/{{ entry.link|escape }}&amp;amp;title={{entry.title|escape}}" title="StumbleUpon.">
+									<img src="/themes/{{ blog.theme_name }}/images/stumbleupon.png" alt="StumbleUpon" /></a>
+									<a href="http://digg.com/submit?phase=2&amp;amp;url=/{{ entry.link|escape }}&amp;amp;title={{entry.title|escape}}" title="Digg this!">
+									<img src="/themes/{{ blog.theme_name }}/images/digg.png" alt="Digg This!" /></a>				
+									<a href="http://del.icio.us/post?url=/{{ entry.link|escape }}&amp;amp;title={{entry.title|escape}}" title="Bookmark on Delicious.">
+									<img src="/themes/{{ blog.theme_name }}/images/delicious.png" alt="Bookmark on Delicious" /></a>
+									<a href="http://www.facebook.com/sharer.php?u=/{{ entry.link|escape }}&amp;amp;t={{entry.title|escape}}" title="Share on Facebook.">
+									<img src="/themes/{{ blog.theme_name }}/images/facebook.png" alt="Share on Facebook" id="sharethis-last" /></a>									
+								</div>
+							<!-- end Social Sharing Icons -->							
+		</div>
+            		<div class="postBoxMidInner">
+		{% include "comments.html" %}
+			</div>            
+            {% else %}
+
+		<p>不好意思，没有找到你要的文章，或许你可以在搜索栏查找一下。</p>
+
+	{% endif %}
+		</div>
+		<div class="postBoxBottom"></div>
+        </div>
+	 <!-- End .postBox -->
+	</div>
+	<!-- end colleft -->
+{% include "sidebar.html" %}
+
+{% endblock %}
